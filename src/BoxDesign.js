@@ -38,9 +38,9 @@ const BoxDesign = () => {
 
   return (
     <div className="App">
-      <span>
-        <h1>Credit Card</h1>
-        <form onSubmit={handleSubmit}>
+      <div className="creditCard">
+        <h2> Card Number*</h2>
+        <form onSubmit={handleSubmit} className="credit_Card">
           {[...Array(4).keys()].map((e) => (
             <Input
               number={number}
@@ -60,7 +60,7 @@ const BoxDesign = () => {
             />
           ))}
         </form>
-      </span>
+      </div>
     </div>
   );
 };
@@ -78,6 +78,7 @@ const Input = ({ number, setNumber, index, uRef, setDeletData }) => {
 
   return (
     <input
+      className="input_box"
       ref={uRef}
       style={{ maxWidth: "4ch" }}
       value={number[index]}

@@ -1,9 +1,13 @@
 .App {
   text-align: center;
-}
-
-.App-link {
-  color: #61dafb;
+  /* border: 1px solid gray; */
+  width: 50vw;
+  height: 60vh;
+  margin: 40px 120px;
+  box-shadow: 0px 1px 6px #0000000d;
+  padding: 1rem;
+  border: 1px solid #f3eded;
+  background-color: rgb(223, 248, 248);
 }
 
 input {
@@ -23,4 +27,17 @@ input {
   border: 1px solid gray;
   padding: 5px;
   max-width: 4ch;
+}
+.creditCard {
+  display: flex;
+  color: #a5afb9;
+  justify-content: center;
+}
+.credit_Card {
+  margin-top: 20px;
+}
+.input_box {
+  margin-left: 10px;
+  border: 2px solid rgb(176, 228, 228);
+  border-radius: 5px;
 }
