@@ -2,34 +2,34 @@ import { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 const BoxDesign = () => {
-  const aRef = useRef(null);
-  const bRef = useRef(null);
-  const cRef = useRef(null);
-  const dRef = useRef(null);
+  const aRefColumn = useRef(null);
+  const bRefColumn = useRef(null);
+  const cRefColumn = useRef(null);
+  const dREfColumn = useRef(null);
   const [number, setNumber] = useState([]);
+  const [deletData, setDeletData] = useState("");
 
   useEffect(() => {
-    aRef.current.focus();
-    if (aRef.current.value.length === 4) {
-      bRef.current.focus();
+    aRefColumn.current.focus();
+    if (aRefColumn.current.value.length === 4) {
+      bRefColumn.current.focus();
     }
-    if (bRef.current.value.length === 4) {
-      cRef.current.focus();
+    if (bRefColumn.current.value.length === 4) {
+      cRefColumn.current.focus();
     }
-    if (cRef.current.value.length === 4) {
-      dRef.current.focus();
+    if (cRefColumn.current.value.length === 4) {
+      dREfColumn.current.focus();
     }
-    if (number.length === 4 && dRef.current.value.length === 0) {
-      cRef.current.focus();
+    if ((!number[3] || !number[3].length) && deletData === 8) {
+      cRefColumn.current.focus();
     }
-    if (number.length === 3 && cRef.current.value.length === 0) {
-      bRef.current.focus();
+    if ((!number[2] || !number[2].length) && deletData === 8) {
+      bRefColumn.current.focus();
     }
-    if (number.length === 2 && bRef.current.value.length === 0) {
-      aRef.current.focus();
+    if ((!number[1] || !number[1].length) && deletData === 8) {
+      aRefColumn.current.focus();
     }
-    console.log(number, "number");
-  }, [number, aRef, bRef, cRef, dRef]);
+  }, [number]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const BoxDesign = () => {
   return (
     <div className="App">
       <span>
-        <h1>crad</h1>
+        <h1>Credit Card</h1>
         <form onSubmit={handleSubmit}>
           {[...Array(4).keys()].map((e) => (
             <Input
@@ -47,7 +47,16 @@ const BoxDesign = () => {
               setNumber={setNumber}
               key={e}
               index={e}
-              uRef={e === 0 ? aRef : e === 1 ? bRef : e === 2 ? cRef : dRef}
+              setDeletData={setDeletData}
+              uRef={
+                e === 0
+                  ? aRefColumn
+                  : e === 1
+                  ? bRefColumn
+                  : e === 2
+                  ? cRefColumn
+                  : dREfColumn
+              }
             />
           ))}
         </form>
@@ -56,11 +65,15 @@ const BoxDesign = () => {
   );
 };
 
-const Input = ({ number, setNumber, index, uRef }) => {
-  const abc = (e) => {
+const Input = ({ number, setNumber, index, uRef, setDeletData }) => {
+  const handleChange = (e) => {
     let arr = [...number];
     arr[index] = e.target.value.replace(/[^0-9]/g, "");
     setNumber([...arr]);
+  };
+
+  const handleKeyUp = (e) => {
+    setDeletData(e.keyCode);
   };
 
   return (
@@ -71,7 +84,8 @@ const Input = ({ number, setNumber, index, uRef }) => {
       size="4"
       name="number"
       maxLength="4"
-      onChange={abc}
+      onChange={handleChange}
+      onKeyUp={handleKeyUp}
     />
   );
 };
